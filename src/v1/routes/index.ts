@@ -1,32 +1,32 @@
-import express from 'express'
+import express, { RequestHandler } from 'express'
 import { getUserById, getUsers } from '../../controllers/users.controller'
 import { getMovieById, getMovies, getNoveltyMovies, postMovie, postMovieWatched } from '../../controllers/movies.controller'
 import { getCategories, getCategoryMovies, postCategory } from '../../controllers/categories.controller'
 import { postLogin, postSignup } from '../../controllers/auth.controller'
-import { userSignupValidator } from '../../utils/validators/user.validator'
+import { userLoginValidator, userSignupValidator } from '../../utils/validators/user.validator'
 
 export const defaultRouter = express.Router()
 
 // AUTHENTICATION ROUTES
 defaultRouter
-  .post('/auth/signup', userSignupValidator, postSignup)
-  .post('/auth/login', postLogin)
+  .post('/auth/signup', userSignupValidator, (postSignup) as RequestHandler)
+  .post('/auth/login', userLoginValidator, (postLogin) as RequestHandler)
 
 // USERS routes
 defaultRouter
-  .get('/users', getUsers)
-  .get('/users/:id', getUserById)
+  .get('/users', (getUsers) as RequestHandler)
+  .get('/users/:id', (getUserById) as RequestHandler)
 
 // MOVIES routes
 defaultRouter
-  .post('/movies', postMovie)
-  .post('/movies/:id/watched', postMovieWatched)
-  .get('/movies', getMovies)
-  .get('/movies/novelties', getNoveltyMovies)
-  .get('/movies/:id', getMovieById)
+  .post('/movies', (postMovie) as RequestHandler)
+  .post('/movies/:id/watched', (postMovieWatched) as RequestHandler)
+  .get('/movies', (getMovies) as RequestHandler)
+  .get('/movies/novelties', (getNoveltyMovies) as RequestHandler)
+  .get('/movies/:id', (getMovieById) as RequestHandler)
 
 // CATEGORIES routes
 defaultRouter
-  .post('/categories', postCategory)
-  .get('/categories', getCategories)
-  .get('/categories/:id/movies', getCategoryMovies)
+  .post('/categories', (postCategory) as RequestHandler)
+  .get('/categories', (getCategories) as RequestHandler)
+  .get('/categories/:id/movies', (getCategoryMovies) as RequestHandler)

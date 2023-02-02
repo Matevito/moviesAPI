@@ -16,7 +16,7 @@ export const getUserByUsername = async (username: string): Promise< UserFull > =
   }
 }
 
-export const getUserByEmail = async (email: string): Promise< UserFull > => {
+export const getUserByEmail = async (email: string): Promise<UserFull> => {
   const queryString: string = 'SELECT * FROM users WHERE email = $1'
   try {
     const { rows } = await db.query(queryString, [email])

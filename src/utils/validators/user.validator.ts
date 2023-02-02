@@ -38,3 +38,21 @@ export const userSignupValidator = [
     next()
   }
 ]
+
+export const userLoginValidator = [
+  body('email').isEmail().normalizeEmail().trim().escape(),
+  body('password').isString().isLength({ min: 5 }).trim().escape(),
+  body('password').custom(() => console.log('todo')).escape(),
+
+  (req: Request, res: Response, next: NextFunction): any => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        errors: errors.array(),
+        msg: 'Error validating data'
+      })
+    }
+    next()
+  }
+]
