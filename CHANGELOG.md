@@ -1,3 +1,15 @@
+# VERSION 0.2.0
+
+## Added
+
+- Added workable signup functionality. A user can be created.
+- todo: Added workable login functionality.
+- todo: Added jwt authentication middleware.
+
+## FIX
+
+- Solved bugg with v4 of express handling controllers that return void promises.
+
 # VERSION 0.1.1
 
 ## Fix
