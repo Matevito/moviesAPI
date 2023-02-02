@@ -1,11 +1,11 @@
 import { db } from '../database'
-// import { CallbackError, UserFull, UserResult, UserSecure } from '../types'
+import { UserFull } from '../types'
 
-export const getUserByUsername = async (username: string): Promise<any> => {
+export const getUserByUsername = async (username: string): Promise< UserFull | undefined > => {
   const queryString: string = 'SELECT * FROM users WHERE username = $1'
   try {
     const { rows } = await db.query(queryString, [username])
-    const result = rows[0]
+    const result: UserFull = rows[0]
 
     return result
   } catch (err: any) {
@@ -13,11 +13,11 @@ export const getUserByUsername = async (username: string): Promise<any> => {
   }
 }
 
-export const getUserByEmail = async (email: string): Promise<any> => {
+export const getUserByEmail = async (email: string): Promise<UserFull | undefined > => {
   const queryString: string = 'SELECT * FROM users WHERE email = $1'
   try {
     const { rows } = await db.query(queryString, [email])
-    const result = rows[0]
+    const result: UserFull = rows[0]
 
     return result
   } catch (err: any) {
