@@ -3,12 +3,13 @@ import { getUserById, getUsers } from '../../controllers/users.controller'
 import { getMovieById, getMovies, getNoveltyMovies, postMovie, postMovieWatched } from '../../controllers/movies.controller'
 import { getCategories, getCategoryMovies, postCategory } from '../../controllers/categories.controller'
 import { postLogin, postSignup } from '../../controllers/auth.controller'
+import { userSignupValidator } from '../../utils/validators/user.validator'
 
 export const defaultRouter = express.Router()
 
 // AUTHENTICATION ROUTES
 defaultRouter
-  .post('/auth/signup', postSignup)
+  .post('/auth/signup', userSignupValidator, postSignup)
   .post('/auth/login', postLogin)
 
 // USERS routes

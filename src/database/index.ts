@@ -1,19 +1,16 @@
+import * as dotenv from 'dotenv'
 import { Pool } from 'pg'
 
+dotenv.config()
+
 const pool = new Pool({
-  host: process.env.PSQL_HOST,
-  user: process.env.PSQL_USER,
-  password: process.env.PSQL_PASSWORD,
-  database: process.env.PSQL_DB
+  host: String(process.env.PSQL_HOST),
+  user: String(process.env.PSQL_USER),
+  password: String(process.env.PSQL_PASSWORD),
+  port: Number(process.env.PSQL_PORT),
+  database: String(process.env.PSQL_DB)
 })
 
-module.exports = {
-  query: (text: string, params: string[], callback: any) => {
-    const start = Date.now()
-    return pool.query(text, params, (err, res) => {
-      const duration = Date.now() - start
-      console.log('executed query', { text, duration, rows: res.rowCount })
-      callback(err, res)
-    })
-  }
+export const db = {
+  query: async (text: string, params: string[]) => await pool.query(text, params)
 }
