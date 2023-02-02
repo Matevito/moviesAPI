@@ -1,10 +1,15 @@
 import { Request } from 'express'
 import { JwtPayload } from 'jsonwebtoken'
 
+// express types
 interface CallbackError {
   message: string
 }
+export interface IGetUserInfoRequest extends Request {
+  user?: string | JwtPayload
+}
 
+// user types
 export interface UserResult {
   rows: UserFull[]
 }
@@ -18,6 +23,9 @@ export interface UserFull {
 
 export type UserSecure = Omit<UserFull, 'password'>
 
-export interface IGetUserInfoRequest extends Request {
-  user?: string | JwtPayload
+// category types
+export interface Category {
+  id: integer
+  title: string
 }
+// movie types
