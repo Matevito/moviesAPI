@@ -4,6 +4,9 @@ import { getMovieById, getMovies, getNoveltyMovies, postMovie, postMovieWatched 
 import { getCategories, getCategoryMovies, postCategory } from '../../controllers/categories.controller'
 import { postLogin, postSignup } from '../../controllers/auth.controller'
 import { userLoginValidator, userSignupValidator } from '../../utils/validators/user.validator'
+import { verifyToken } from '../../middlewares/verifyToken'
+import { categoryCreateValidator } from '../../utils/validators/category.validator'
+import { movieCreateValidator } from '../../utils/validators/movie.validator'
 
 export const defaultRouter = express.Router()
 
@@ -19,14 +22,14 @@ defaultRouter
 
 // MOVIES routes
 defaultRouter
-  .post('/movies', (postMovie) as RequestHandler)
-  .post('/movies/:id/watched', (postMovieWatched) as RequestHandler)
+  .post('/movies', verifyToken, movieCreateValidator, (postMovie) as RequestHandler)
+  .post('/movies/:id/watched', verifyToken, (postMovieWatched) as RequestHandler)
   .get('/movies', (getMovies) as RequestHandler)
   .get('/movies/novelties', (getNoveltyMovies) as RequestHandler)
   .get('/movies/:id', (getMovieById) as RequestHandler)
 
 // CATEGORIES routes
 defaultRouter
-  .post('/categories', (postCategory) as RequestHandler)
+  .post('/categories', verifyToken, categoryCreateValidator, (postCategory) as RequestHandler)
   .get('/categories', (getCategories) as RequestHandler)
   .get('/categories/:id/movies', (getCategoryMovies) as RequestHandler)

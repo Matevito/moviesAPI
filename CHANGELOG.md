@@ -4,8 +4,8 @@
 
 - Added get users services.
 
-- todo: added create movies controller.
-- todo: Added create category controller.
+- todo: added create movies controller and movies validator.
+- todo: Added create category controller and category validator.
 - todo: Added mark movie as watched for a user route.
 
 # VERSION 0.2.0
