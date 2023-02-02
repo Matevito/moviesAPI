@@ -1,3 +1,13 @@
+# VERSION 0.3.0
+
+## Added
+
+- Added get users services.
+
+- todo: added create movies controller.
+- todo: Added create category controller.
+- todo: Added mark movie as watched for a user route.
+
 # VERSION 0.2.0
 
 ## Added
@@ -22,8 +32,8 @@
 
 - The express app runs correctly.
 
-* Added the folder structure of the app using a MVC architecture.
+- Added the folder structure of the app using a MVC architecture.
 
 - The routes of the v1 of the app are accessible.
 
-* Added database pool client configuration.
+- Added database pool client configuration.

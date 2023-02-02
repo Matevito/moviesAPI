@@ -1,5 +1,5 @@
 import { db } from '../database'
-import { UserFull } from '../types'
+import { UserFull, UserSecure } from '../types'
 import { cryptPassword } from '../utils/encryptPassword'
 
 // GET SERVICES
@@ -21,6 +21,36 @@ export const getUserByEmail = async (email: string): Promise<UserFull> => {
   try {
     const { rows } = await db.query(queryString, [email])
     const result: UserFull = rows[0]
+
+    return result
+  } catch (err: any) {
+    throw new Error('Error connecting to db')
+  }
+}
+
+export const getUserById = async (id: number): Promise<UserFull> => {
+  const queryString: string = 'SELECT * FROM users WHERE id = $1'
+  try {
+    const { rows } = await db.query(queryString, [String(id)])
+    const result: UserFull = rows[0]
+
+    return result
+  } catch (err: any) {
+    throw new Error('Error connecting to db')
+  }
+}
+
+export const getUsers = async (id: string): Promise<UserSecure[]> => {
+  const queryString: string = 'SELECT * FROM users'
+  try {
+    const { rows } = await db.query(queryString, [id])
+    const result: UserSecure[] = rows.map((row: UserFull) => {
+      return {
+        id: row.id,
+        username: row.username,
+        email: row.email
+      }
+    })
 
     return result
   } catch (err: any) {
