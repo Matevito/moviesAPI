@@ -1,6 +1,6 @@
 import { UserFull, UserSecure } from '../types'
 
-export const parseSaveUser = (userData: UserFull): UserSecure => {
+export const secureUser = (userData: UserFull): UserSecure => {
   return {
     id: userData.id,
     username: userData.username,
