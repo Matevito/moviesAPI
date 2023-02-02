@@ -4,7 +4,7 @@
 
 - Added workable signup functionality. A user can be created.
 - Added workable login functionality.
-- todo: Added jwt authentication middleware.
+- Added jwt authentication middleware.
 
 ## FIX
 

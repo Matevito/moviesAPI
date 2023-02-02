@@ -1,3 +1,6 @@
+import { Request } from 'express'
+import { JwtPayload } from 'jsonwebtoken'
+
 interface CallbackError {
   message: string
 }
@@ -14,3 +17,7 @@ export interface UserFull {
 }
 
 export type UserSecure = Omit<UserFull, 'password'>
+
+export interface IGetUserInfoRequest extends Request {
+  user?: string | JwtPayload
+}
