@@ -1,17 +1,17 @@
 import { Request, Response } from 'express'
-import { createUser } from '../services/user.services'
-import { UserFull } from '../types'
+import { createUser, getUserByUsername } from '../services/user.services'
 import { secureUser } from '../utils/secureUser'
 
 export const postSignup = async (req: Request, res: Response): Promise<void> => {
   const { username, email, password } = req.body
   try {
-    const savedUser: UserFull = await createUser(username, email, password)
-    const saveUserData = secureUser(savedUser)
+    await createUser(username, email, password)
+    const savedUser = await getUserByUsername(username)
+    const userData = secureUser(savedUser)
 
     res.status(200).json({
       error: null,
-      data: saveUserData,
+      data: userData,
       msg: 'User created successfully!'
     })
   } catch (err: any) {

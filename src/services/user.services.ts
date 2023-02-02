@@ -1,5 +1,6 @@
 import { db } from '../database'
 import { UserFull } from '../types'
+import { cryptPassword } from '../utils/encryptPassword'
 
 // GET SERVICES
 
@@ -29,15 +30,14 @@ export const getUserByEmail = async (email: string): Promise< UserFull > => {
 
 // CREATE SERVICES
 
-export const createUser = async (username: string, email: string, password: string): Promise< UserFull > => {
-  const userParams = [username, email, password]
-  const queryString: string = 'INSERT INTO users (username, email, password) VALUES ($1 $2 $3)'
+export const createUser = async (username: string, email: string, password: string): Promise<void> => {
+  const queryString: string = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3)'
+  const hash = cryptPassword(password)
+  const userParams = [username, email, hash]
   try {
-    const { rows } = await db.query(queryString, userParams)
-    const result: UserFull = rows[0]
-
-    return result
+    await db.query(queryString, userParams)
   } catch (err: any) {
+    console.log(err.message)
     throw new Error('Error connecting to db')
   }
 }
