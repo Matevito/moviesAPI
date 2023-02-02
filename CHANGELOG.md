@@ -1,4 +1,10 @@
-# Version 0.1.0
+# VERSION 0.1.1
+
+## Fix
+
+- Signin and Singup routes are now separated of the user routes into the auth route.
+
+# VERSION 0.1.0
 
 ## Added
 

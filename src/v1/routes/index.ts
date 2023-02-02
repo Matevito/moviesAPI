@@ -1,13 +1,18 @@
 import express from 'express'
-import { getUserById, getUsers, postUser } from '../../controllers/users.controller'
+import { getUserById, getUsers } from '../../controllers/users.controller'
 import { getMovieById, getMovies, getNoveltyMovies, postMovie, postMovieWatched } from '../../controllers/movies.controller'
 import { getCategories, getCategoryMovies, postCategory } from '../../controllers/categories.controller'
+import { postLogin, postSignup } from '../../controllers/auth.controller'
 
 export const defaultRouter = express.Router()
 
+// AUTHENTICATION ROUTES
+defaultRouter
+  .post('/auth/signup', postSignup)
+  .post('/auth/login', postLogin)
+
 // USERS routes
 defaultRouter
-  .post('/users', postUser)
   .get('/users', getUsers)
   .get('/users/:id', getUserById)
 

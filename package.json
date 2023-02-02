@@ -1,6 +1,6 @@
 {
   "name": "moviesapi",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "simple movies api made for a tecnical test",
   "main": "src/server.ts",
   "scripts": {
