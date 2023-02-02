@@ -4,11 +4,10 @@ import { cryptPassword } from '../utils/encryptPassword'
 
 // GET SERVICES
 
-export const getUserByUsername = async (username: string): Promise<UserFull | undefined> => {
+export const getUserByUsername = async (username: string): Promise<UserFull > => {
   const queryString: string = 'SELECT * FROM users WHERE username = $1'
   try {
     const { rows } = await db.query(queryString, [username])
-    if (rows.length === 0) return undefined
     const result: UserFull = rows[0]
 
     return result
@@ -17,11 +16,10 @@ export const getUserByUsername = async (username: string): Promise<UserFull | un
   }
 }
 
-export const getUserByEmail = async (email: string): Promise<UserFull | undefined> => {
+export const getUserByEmail = async (email: string): Promise<UserFull> => {
   const queryString: string = 'SELECT * FROM users WHERE email = $1'
   try {
     const { rows } = await db.query(queryString, [email])
-    if (rows.length === 0) return undefined
     const result: UserFull = rows[0]
 
     return result
@@ -34,7 +32,6 @@ export const getUserById = async (id: number): Promise<UserFull> => {
   const queryString: string = 'SELECT * FROM users WHERE id = $1'
   try {
     const { rows } = await db.query(queryString, [String(id)])
-    if (rows.length === 0) return undefined
     const result: UserFull = rows[0]
 
     return result
