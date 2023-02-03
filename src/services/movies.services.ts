@@ -3,7 +3,7 @@ import { createMovieQuery, getMovieByTitleQuery, getMoviesQuery, getNoveltyMovie
 import { MovieQueries, MovieWithCategory } from '../types'
 
 // GET movies services
-export const getMovieByTitle = async (title: string): Promise<MovieWithCategory> => {
+export const getMovieByTitleService = async (title: string): Promise<MovieWithCategory> => {
   const queryString = getMovieByTitleQuery
   try {
     const { rows } = await db.query(queryString, [title])

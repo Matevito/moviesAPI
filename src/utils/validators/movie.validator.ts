@@ -2,7 +2,7 @@ import { NextFunction, Response } from 'express'
 import { IGetUserInfoRequest } from '../../types'
 import { body, validationResult } from 'express-validator'
 import { getCategoryByTitle } from '../../services/categories.services'
-import { getMovieByTitle } from '../../services/movies.services'
+import { getMovieByTitleService } from '../../services/movies.services'
 
 export const movieCreateValidator = [
   body('title')
@@ -10,7 +10,7 @@ export const movieCreateValidator = [
     .isLength({ min: 1, max: 255 }).trim().escape(),
   body('title')
     .custom(async (value: string): Promise<boolean | undefined> => {
-      const movieInDb = await getMovieByTitle(value)
+      const movieInDb = await getMovieByTitleService(value)
       if (movieInDb !== undefined) throw new Error('Movie already exists in db')
       return true
     }).escape(),

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { IGetUserInfoRequest } from '../types'
-import { createMovie, getMovieByTitle, getMoviesService, getNoveltyMoviesService, markMovieAsWatched } from '../services/movies.services'
+import { createMovie, getMovieByTitleService, getMoviesService, getNoveltyMoviesService, markMovieAsWatched } from '../services/movies.services'
 import { getUserMoviesWatched } from '../services/user.services'
 import { getCategoryByTitle } from '../services/categories.services'
 
@@ -8,7 +8,7 @@ export const postMovie = async (req: IGetUserInfoRequest, res: Response): Promis
   const { title, description, releaseDate, category } = req.body
   try {
     await createMovie(title, description, releaseDate, category)
-    const movieData = await getMovieByTitle(title)
+    const movieData = await getMovieByTitleService(title)
     res.status(200).json({
       error: null,
       data: movieData,
@@ -101,8 +101,29 @@ export const getNoveltyMovies = async (_req: Request, res: Response): Promise<vo
   }
 }
 
-export const getMovieById = (_req: Request, res: Response): void => {
-  res.status(200).json({
-    message: 'get movie by id'
-  })
+export const getMovieByTitle = async (req: Request, res: Response): Promise<any> => {
+  const { title } = req.params
+  try {
+    const savedMovie = await getMovieByTitleService(title)
+    if (savedMovie === undefined) {
+      // check if movie is stored in db
+      return res.status(404).json({
+        error: true,
+        data: null,
+        msg: 'Movie not found'
+      })
+    }
+
+    res.status(200).json({
+      error: null,
+      data: savedMovie,
+      msg: 'Movie fetched successfully!'
+    })
+  } catch (err: any) {
+    res.status(500).json({
+      error: err.message,
+      data: null,
+      msg: 'Internal server error!'
+    })
+  }
 }
