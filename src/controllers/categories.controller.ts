@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { IGetUserInfoRequest } from '../types'
-import { createCategory, getCategoryByTitle } from '../services/categories.services'
+import { createCategory, getCategoriesService, getCategoryByTitle } from '../services/categories.services'
 
 export const postCategory = async (req: IGetUserInfoRequest, res: Response): Promise<void> => {
   const { title } = req.body
@@ -21,8 +21,19 @@ export const postCategory = async (req: IGetUserInfoRequest, res: Response): Pro
   }
 }
 
-export const getCategories = (_req: Request, res: Response): void => {
-  res.json({
-    msg: 'get categories'
-  })
+export const getCategories = async (_req: Request, res: Response): Promise<void> => {
+  try {
+    const categoriesSaved = await getCategoriesService()
+    res.status(200).json({
+      error: null,
+      data: categoriesSaved,
+      msg: 'Categories fetched successfully!'
+    })
+  } catch (err: any) {
+    res.status(500).json({
+      error: err.message,
+      data: null,
+      msg: 'Internal server error!'
+    })
+  }
 }

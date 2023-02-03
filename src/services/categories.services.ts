@@ -3,7 +3,7 @@ import { createCategoryQuery, getCategoriesQuery, getCategoryByTitleQuery } from
 import { Category } from '../types'
 
 // GET SERVICES
-export const getCategories = async (): Promise<Category[] | undefined > => {
+export const getCategoriesService = async (): Promise<Category[] | undefined > => {
   const queryString = getCategoriesQuery
   try {
     const { rows } = await db.query(queryString, [])
