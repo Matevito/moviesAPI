@@ -9,7 +9,7 @@ const pool = new Pool({
   password: String(process.env.PSQL_PASSWORD),
   port: Number(process.env.PSQL_PORT),
   database: String(process.env.PSQL_DB),
-  connectionString: String(process.env.PSQL_UR)
+  connectionString: String(process.env.PSQL_URL)
 })
 
 export const db = {
