@@ -1,7 +1,5 @@
 # Prueba técnica [desarrollador backend]
 
-## API BASICA DE PELICULAS
-
 Esta aplicación consiste en una API REST que gestiona datos entre usuarios, películas y sus correspondientes categorías. La aplicatión esta desarrollada en **Typescript** usando el framework **Express.js** y utiliza **PostsgreSQL** como base de datos. Para realizar las conexiones con la base de datos se utilizo la libreria **pg**. Tambien se utilizaron bibliotecas como **bcryptjs** para encriptar las contraseñas de los usuarios, **jsonwebtoken** para lidiar con la autorizacion de los usuarios y **express-validator** para lidiar con los formularios para añadir elementos en la base de datos.
 
 El proyecto utiliza **MVC** (Modelo-Vista-Controlador) como el modelo de arquitectura al desarrollar esta prueba tecnica. En la carpeta de [/database](./src/database) se encuentran todos los script SQL utilizados por la aplicación. En la carpeta [/services](./src/services) se encuentran acoplados todas las funciones que utilizan esos queries para realizar peticiones a la base de datos.
