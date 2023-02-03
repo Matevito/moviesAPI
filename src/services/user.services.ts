@@ -63,7 +63,6 @@ export const getUsers = async (): Promise<UserSecure[]> => {
 export const getUserMoviesWatched = async (userId: string): Promise<any> => {
   const queryString = getUserMoviesWatchedQuery
   try {
-    console.log(queryString)
     const { rows } = await db.query(queryString, [userId])
     return rows
   } catch (err: any) {

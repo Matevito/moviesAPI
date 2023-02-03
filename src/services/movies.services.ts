@@ -23,7 +23,6 @@ export const createMovie = async (title: string, description: string, releaseDat
   try {
     await db.query(query, [title, description, releaseDate, category])
   } catch (err: any) {
-    console.log(query)
     console.log(err.message)
     throw new Error('Error connecting to db')
   }
