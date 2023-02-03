@@ -1,9 +1,10 @@
 import { db } from '../database'
+import { createCategoryQuery, getCategoriesQuery, getCategoryByTitleQuery } from '../database/sqlScipt'
 import { Category } from '../types'
 
 // GET SERVICES
 export const getCategories = async (): Promise<Category[] | undefined > => {
-  const queryString: string = 'SELECT * FROM categories'
+  const queryString = getCategoriesQuery
   try {
     const { rows } = await db.query(queryString, [])
     return rows
@@ -13,7 +14,7 @@ export const getCategories = async (): Promise<Category[] | undefined > => {
 }
 
 export const getCategoryByTitle = async (title: string): Promise<Category> => {
-  const queryString: string = 'SELECT * FROM categories WHERE title = $1'
+  const queryString = getCategoryByTitleQuery
   try {
     const { rows } = await db.query(queryString, [title])
     const result: Category = rows[0]
@@ -26,7 +27,7 @@ export const getCategoryByTitle = async (title: string): Promise<Category> => {
 
 // POST SERVICES
 export const createCategory = async (title: string): Promise<void> => {
-  const queryString: string = 'INSERT INTO categories (title) VALUES ($1)'
+  const queryString = createCategoryQuery
   try {
     await db.query(queryString, [title])
   } catch (err: any) {

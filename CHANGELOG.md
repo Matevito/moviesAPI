@@ -8,6 +8,10 @@
 - Added create category controller and category validator.
 - todo: Added mark movie as watched for a user route.
 
+## Fix
+
+- Modulated the sql commands used on the services
+
 # VERSION 0.2.0
 
 ## Added
