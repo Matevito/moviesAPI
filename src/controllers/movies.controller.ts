@@ -1,7 +1,8 @@
 import { Request, Response } from 'express'
 import { IGetUserInfoRequest } from '../types'
-import { createMovie, getMovieByTitle, getNoveltyMoviesService, markMovieAsWatched } from '../services/movies.services'
+import { createMovie, getMovieByTitle, getMoviesService, getNoveltyMoviesService, markMovieAsWatched } from '../services/movies.services'
 import { getUserMoviesWatched } from '../services/user.services'
+import { getCategoryByTitle } from '../services/categories.services'
 
 export const postMovie = async (req: IGetUserInfoRequest, res: Response): Promise<void> => {
   const { title, description, releaseDate, category } = req.body
@@ -53,16 +54,39 @@ export const postMovieWatched = async (req: IGetUserInfoRequest, res: Response):
   }
 }
 
-export const getMovies = (_req: Request, res: Response): void => {
-  res.status(200).json({
-    message: 'get movies'
-  })
+export const getMovies = async (req: Request, res: Response): Promise<void> => {
+  const title = req.query.title ?? undefined
+  const categoryTitle = req.query.category ?? undefined
+  const sort = req.query.sort ?? 'release_date'
+  const page = req.query.page ?? 1
+  const limit = req.query.limit ?? 10
+
+  try {
+    // Check if category name exist in db
+    const categoryByTitle = await getCategoryByTitle(String(categoryTitle))
+    let category
+    if (categoryByTitle !== undefined) {
+      category = categoryByTitle.id
+    }
+    // continue
+    const moviesData = await getMoviesService({ title, category, sort, page, limit })
+    res.status(200).json({
+      error: null,
+      data: moviesData,
+      msg: 'Movies fetched successfully!'
+    })
+  } catch (err: any) {
+    res.status(500).json({
+      error: err.message,
+      data: null,
+      msg: 'Internal server error!'
+    })
+  }
 }
 
 export const getNoveltyMovies = async (_req: Request, res: Response): Promise<void> => {
   try {
     const noveltyMovies = await getNoveltyMoviesService()
-
     res.status(200).json({
       error: null,
       data: noveltyMovies,

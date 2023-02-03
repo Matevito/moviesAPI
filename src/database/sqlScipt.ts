@@ -1,4 +1,7 @@
+import { MovieQueries } from '../types'
+
 // user queries
+
 // these 3 queries could be a function where the table name is passed in as an argument!
 export const getUserByUsernameQuery = `
     SELECT * 
@@ -77,3 +80,38 @@ export const getAllUsersMoviesWatchedQuery = `
     JOIN user_movies ON users.id = user_movies.user_id
     JOIN movies ON user_movies.movie_id = movies.id;
 `
+
+// !dinamic queries builder
+export const getMoviesQuery = (params: MovieQueries): any => {
+  const { title, category, page, limit, sort } = params
+  let sql = 'SELECT * FROM movies'
+  const Sqlparams: any = []
+
+  if (title !== undefined) {
+    sql += ` WHERE title LIKE '%${String(title)}%'`
+    Sqlparams.push(title)
+  }
+
+  if (category !== undefined) {
+    if (Sqlparams.length === 0) {
+      sql += ' WHERE'
+    }
+    if (Sqlparams.length > 0) {
+      sql += ' AND'
+    }
+    sql += ` category = ${String(category)}`
+    Sqlparams.push(category)
+  }
+
+  if (sort !== undefined) {
+    sql += ` ORDER BY ${String(sort)} DESC`
+    Sqlparams.push(sort)
+  }
+
+  sql += ` LIMIT ${String(limit)} OFFSET ${(page - 1) * limit}`
+  console.log(sql)
+  return {
+    sql,
+    params: Sqlparams
+  }
+}

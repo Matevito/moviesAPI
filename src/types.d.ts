@@ -41,3 +41,11 @@ export interface MovieWithCategory extends Movie {
   category: Category
 }
 export type MovieDetails = Omit<Movie, 'id'>
+
+export interface MovieQueries {
+  title: string | ParsedQs | string[] | ParsedQs[] | undefined
+  category: integer | undefined
+  page: integer | undefined
+  limit: integer | undefined
+  sort: string | ParsedQs | string[] | ParsedQs[] | undefined
+}
