@@ -8,7 +8,8 @@ const pool = new Pool({
   user: String(process.env.PSQL_USER),
   password: String(process.env.PSQL_PASSWORD),
   port: Number(process.env.PSQL_PORT),
-  database: String(process.env.PSQL_DB)
+  database: String(process.env.PSQL_DB),
+  connectionString: String(process.env.PSQL_UR)
 })
 
 export const db = {
