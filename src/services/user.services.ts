@@ -1,5 +1,5 @@
 import { db } from '../database'
-import { createUserQuery, getUserByEmailQuery, getUserByIdQuery, getUserByUsernameQuery, getUsersQuery } from '../database/sqlScipt'
+import { createUserQuery, getUserByEmailQuery, getUserByIdQuery, getUserByUsernameQuery, getUserMoviesWatchedQuery, getUsersQuery } from '../database/sqlScipt'
 import { UserFull, UserSecure } from '../types'
 import { cryptPassword } from '../utils/encryptPassword'
 
@@ -29,7 +29,7 @@ export const getUserByEmail = async (email: string): Promise<UserFull> => {
   }
 }
 
-export const getUserById = async (id: number): Promise<UserFull> => {
+export const getUserByIdService = async (id: number): Promise<UserFull> => {
   const queryString = getUserByIdQuery
   try {
     const { rows } = await db.query(queryString, [String(id)])
@@ -37,6 +37,7 @@ export const getUserById = async (id: number): Promise<UserFull> => {
 
     return result
   } catch (err: any) {
+    console.log(err.message)
     throw new Error('Error connecting to db')
   }
 }
@@ -59,6 +60,16 @@ export const getUsers = async (): Promise<UserSecure[]> => {
   }
 }
 
+export const getUserMoviesWatched = async (userId: string): Promise<any> => {
+  const queryString = getUserMoviesWatchedQuery
+  try {
+    const { rows } = await db.query(queryString, [userId])
+    return rows
+  } catch (err: any) {
+    console.log(err.message)
+    throw new Error('Error connecting to db')
+  }
+}
 // CREATE SERVICES
 
 export const createUser = async (username: string, email: string, password: string): Promise<void> => {

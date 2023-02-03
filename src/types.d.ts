@@ -1,12 +1,11 @@
 import { Request } from 'express'
-import { JwtPayload } from 'jsonwebtoken'
 
 // express types
 interface CallbackError {
   message: string
 }
 export interface IGetUserInfoRequest extends Request {
-  user?: string | JwtPayload
+  user?: any
 }
 
 // user types

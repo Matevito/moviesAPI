@@ -6,7 +6,7 @@
 
 - Added create movies controller and movies validator.
 - Added create category controller and category validator.
-- todo: Added mark movie as watched for a user route.
+- Added mark movie as watched for a user route.
 
 ## Fix
 

@@ -23,7 +23,7 @@ defaultRouter
 // MOVIES routes
 defaultRouter
   .post('/movies', movieCreateValidator, (postMovie) as RequestHandler) // add verifyToken middleware
-  .post('/movies/:id/watched', verifyToken, (postMovieWatched) as RequestHandler)
+  .post('/movies/:movieId/watched', verifyToken, (postMovieWatched) as RequestHandler)
   .get('/movies', (getMovies) as RequestHandler)
   .get('/movies/novelties', (getNoveltyMovies) as RequestHandler)
   .get('/movies/:id', (getMovieById) as RequestHandler)

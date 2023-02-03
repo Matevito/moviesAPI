@@ -7,7 +7,7 @@ export const getUserByEmailQuery = `
     SELECT * FROM users WHERE email = $1;
 `
 export const getUserByIdQuery = `
-    SELECT * FROM users WHERE id = $1;
+    SELECT id, username FROM users WHERE id = $1;
 `
 
 export const getUsersQuery = `
@@ -31,6 +31,7 @@ export const createCategoryQuery = `
 `
 
 // movies queries
+// create a movie without the need of the category id
 export const getMovieByTitleQuery = `
     SELECT movies.*, categories.title as category_title 
     FROM movies 
@@ -41,4 +42,14 @@ export const createMovieQuery = `
     INSERT INTO movies (title, category, description, release_date) 
     SELECT $1, id, $2, $3 FROM categories 
     WHERE title = $4;
+`
+// users_movies table
+export const markMovieAsWatchedQuery = `
+    INSERT INTO user_movies (user_id, movie_id) VALUES ($1, $2);
+`
+export const getUserMoviesWatchedQuery = `
+    SELECT movies.id, movies.title
+    FROM movies
+    JOIN user_movies ON user_movies.movie_id = movies.id
+    WHERE user_movies.user_id = $1;
 `
