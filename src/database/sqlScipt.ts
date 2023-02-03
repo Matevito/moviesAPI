@@ -20,7 +20,7 @@ export const getUserByIdQuery = `
 `
 
 export const getUsersQuery = `
-    SELECT * 
+    SELECT id, username, email 
     FROM users;
 `
 export const createUserQuery = `
@@ -74,6 +74,7 @@ export const getUserMoviesWatchedQuery = `
     JOIN user_movies ON user_movies.movie_id = movies.id
     WHERE user_movies.user_id = $1;
 `
+// this query is wrong because does not retrieve users that have not watched movies
 export const getAllUsersMoviesWatchedQuery = `
     SELECT users.id, users.username, users.email, movies.title
     FROM users

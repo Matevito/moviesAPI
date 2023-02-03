@@ -1,5 +1,5 @@
 import { db } from '../database'
-import { createUserQuery, getAllUsersMoviesWatchedQuery, getUserByEmailQuery, getUserByIdQuery, getUserByUsernameQuery, getUserMoviesWatchedQuery } from '../database/sqlScipt'
+import { createUserQuery, getUserByEmailQuery, getUserByIdQuery, getUserByUsernameQuery, getUserMoviesWatchedQuery, getUsersQuery } from '../database/sqlScipt'
 import { UserFull } from '../types'
 import { cryptPassword } from '../utils/encryptPassword'
 
@@ -43,12 +43,14 @@ export const getUserByIdService = async (id: number): Promise<UserFull> => {
 }
 
 export const getUsersService = async (): Promise<any> => {
-  const queryString: string = getAllUsersMoviesWatchedQuery
+  const queryString: string = getUsersQuery
   try {
     const { rows } = await db.query(queryString, [])
 
     return rows
   } catch (err: any) {
+    console.log(queryString)
+    console.log(err.message)
     throw new Error('Error connecting to db')
   }
 }

@@ -22,6 +22,9 @@ export interface UserFull {
 
 export type UserSecure = Omit<UserFull, 'password'>
 
+export interface UserWatchedMovies extends UserSecure {
+  watchedMovies: string[]
+}
 // category types
 export interface Category {
   id: integer
