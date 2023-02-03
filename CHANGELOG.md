@@ -5,7 +5,7 @@
 - Get movies route with query functionalities.
 - Connected verifyToken to some routes that require authentication.
 - Added get movieby title route.
-- todo: Write simple readme with how to setup the app. It has placeholders for where it would be deployed.
+- Write simple readme with how to setup the app. It has placeholders for where it would be deployed.
 
 # VERSION 0.4.0
 
