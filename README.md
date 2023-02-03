@@ -6,6 +6,10 @@ Esta aplicación consiste en una API REST que gestiona datos entre usuarios, pel
 
 El proyecto utiliza **MVC** (Modelo-Vista-Controlador) como el modelo de arquitectura al desarrollar esta prueba tecnica. En la carpeta de [/database](./src/database) se encuentran todos los script SQL utilizados por la aplicación. En la carpeta [/services](./src/services) se encuentran acoplados todas las funciones que utilizan esos queries para realizar peticiones a la base de datos.
 
+![Esquema modelo  de la base de datos](./DATABASE_MODEL.png)
+
+## Enlaces a demo de la aplicación
+
 - La API se encuentra desplegada en el siguiente enlace: <todo:>
 
 - La documentacion sobre cada una de las distintas rutas la pueden encontrar <aca:>
