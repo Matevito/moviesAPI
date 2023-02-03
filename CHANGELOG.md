@@ -4,7 +4,7 @@
 
 - Get one user with it's watched movies list.
 - Get users list with it's corresponding watched movies.
-- todo: Route that shows movies novelties list.
+- Route that shows movies novelties list.
 
 # VERSION 0.3.0
 

@@ -1,5 +1,5 @@
 import { db } from '../database'
-import { createMovieQuery, getMovieByTitleQuery, markMovieAsWatchedQuery } from '../database/sqlScipt'
+import { createMovieQuery, getMovieByTitleQuery, getNoveltyMoviesQuery, markMovieAsWatchedQuery } from '../database/sqlScipt'
 import { MovieWithCategory } from '../types'
 
 // GET movies services
@@ -17,6 +17,16 @@ export const getMovieByTitle = async (title: string): Promise<MovieWithCategory>
 
 /* export const getMovies */
 
+export const getNoveltyMoviesService = async (): Promise<any> => {
+  const queryString = getNoveltyMoviesQuery
+  try {
+    const { rows } = await db.query(queryString, [])
+    return rows
+  } catch (err: any) {
+    console.log(err.message)
+    throw new Error('Error connecting to db')
+  }
+}
 // CREATE movies services
 export const createMovie = async (title: string, description: string, releaseDate: string, category: string): Promise<void> => {
   const query = createMovieQuery

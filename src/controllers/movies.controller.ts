@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { IGetUserInfoRequest } from '../types'
-import { createMovie, getMovieByTitle, markMovieAsWatched } from '../services/movies.services'
+import { createMovie, getMovieByTitle, getNoveltyMoviesService, markMovieAsWatched } from '../services/movies.services'
 import { getUserMoviesWatched } from '../services/user.services'
 
 export const postMovie = async (req: IGetUserInfoRequest, res: Response): Promise<void> => {
@@ -59,10 +59,22 @@ export const getMovies = (_req: Request, res: Response): void => {
   })
 }
 
-export const getNoveltyMovies = (_req: Request, res: Response): void => {
-  res.status(200).json({
-    message: 'get novelty movies'
-  })
+export const getNoveltyMovies = async (_req: Request, res: Response): Promise<void> => {
+  try {
+    const noveltyMovies = await getNoveltyMoviesService()
+
+    res.status(200).json({
+      error: null,
+      data: noveltyMovies,
+      msg: 'returned movies from the last 3 weeks'
+    })
+  } catch (err: any) {
+    res.status(500).json({
+      error: err.message,
+      data: null,
+      msg: 'Internal server error!'
+    })
+  }
 }
 
 export const getMovieById = (_req: Request, res: Response): void => {
