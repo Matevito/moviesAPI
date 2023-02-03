@@ -1,7 +1,7 @@
 import { db } from '../database'
 import { MovieWithCategory } from '../types'
 
-// GET movies servicess
+// GET movies services
 export const getMovieByTitle = async (title: string): Promise<MovieWithCategory> => {
   const queryString: string = 'SELECT movies.*, categories.title as category_title FROM movies JOIN categories ON categories.id = movies.category WHERE movies.title = $1'
   try {
