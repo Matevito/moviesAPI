@@ -37,3 +37,8 @@ export interface Movie {
   release_date: Date
   category: integer
 }
+
+export interface MovieWithCategory extends Movie {
+  category: Category
+}
+export type MovieDetails = Omit<Movie, 'id'>

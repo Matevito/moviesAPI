@@ -1,12 +1,12 @@
 import { Request, Response } from 'express'
 import { IGetUserInfoRequest } from '../types'
-import { createCategory, getCategoryByName } from '../services/categories.services'
+import { createCategory, getCategoryByTitle } from '../services/categories.services'
 
 export const postCategory = async (req: IGetUserInfoRequest, res: Response): Promise<void> => {
-  const { category } = req.body
+  const { title } = req.body
   try {
-    await createCategory(category)
-    const categoryData = await getCategoryByName(category)
+    await createCategory(title)
+    const categoryData = await getCategoryByTitle(title)
     res.status(200).json({
       error: null,
       data: categoryData,

@@ -12,13 +12,14 @@ export const getCategories = async (): Promise<Category[] | undefined > => {
   }
 }
 
-export const getCategoryByName = async (name: string): Promise<Category> => {
-  const queryString: string = 'SELECT * FROM categories WHERE name = $1'
+export const getCategoryByTitle = async (title: string): Promise<Category> => {
+  const queryString: string = 'SELECT * FROM categories WHERE title = $1'
   try {
-    const { rows } = await db.query(queryString, [name])
-    const result = rows[0]
+    const { rows } = await db.query(queryString, [title])
+    const result: Category = rows[0]
     return result
   } catch (err: any) {
+    console.log(err.message)
     throw new Error('Error connecting to db')
   }
 }
@@ -29,6 +30,7 @@ export const createCategory = async (title: string): Promise<void> => {
   try {
     await db.query(queryString, [title])
   } catch (err: any) {
+    console.log(err.message)
     throw new Error('Error connecting to db')
   }
 }
