@@ -12,11 +12,10 @@ export const getCategories = async (): Promise<Category[] | undefined > => {
   }
 }
 
-export const getCategoryByName = async (name: string): Promise<Category | undefined> => {
+export const getCategoryByName = async (name: string): Promise<Category> => {
   const queryString: string = 'SELECT * FROM categories WHERE name = $1'
   try {
     const { rows } = await db.query(queryString, [name])
-    if (rows.length === 0) return undefined
     const result = rows[0]
     return result
   } catch (err: any) {

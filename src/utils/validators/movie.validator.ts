@@ -1,6 +1,7 @@
 import { NextFunction, Response } from 'express'
 import { IGetUserInfoRequest } from '../../types'
 import { body, validationResult } from 'express-validator'
+import { getCategoryByName } from '../../services/categories.services'
 
 export const movieCreateValidator = [
   body('title')
@@ -17,8 +18,10 @@ export const movieCreateValidator = [
     .escape(),
 
   body('category')
-    .custom(async (value): Promise<boolean | undefined> => {
-      return undefined
+    .custom(async (value: string): Promise<boolean | undefined> => {
+      const categoryInDb = await getCategoryByName(value)
+      if (categoryInDb === undefined) throw new Error('Category not found, try with another one')
+      return true
     }).escape(),
 
   (req: IGetUserInfoRequest, res: Response, next: NextFunction): any => {

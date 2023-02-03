@@ -28,4 +28,12 @@ export interface Category {
   id: integer
   title: string
 }
+
 // movie types
+export interface Movie {
+  id: integer
+  title: string
+  description: string
+  release_date: Date
+  category: integer
+}
