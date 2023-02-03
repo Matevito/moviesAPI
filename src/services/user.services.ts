@@ -1,6 +1,6 @@
 import { db } from '../database'
-import { createUserQuery, getUserByEmailQuery, getUserByIdQuery, getUserByUsernameQuery, getUserMoviesWatchedQuery, getUsersQuery } from '../database/sqlScipt'
-import { UserFull, UserSecure } from '../types'
+import { createUserQuery, getAllUsersMoviesWatchedQuery, getUserByEmailQuery, getUserByIdQuery, getUserByUsernameQuery, getUserMoviesWatchedQuery } from '../database/sqlScipt'
+import { UserFull } from '../types'
 import { cryptPassword } from '../utils/encryptPassword'
 
 // GET SERVICES
@@ -42,19 +42,12 @@ export const getUserByIdService = async (id: number): Promise<UserFull> => {
   }
 }
 
-export const getUsers = async (): Promise<UserSecure[]> => {
-  const queryString: string = getUsersQuery
+export const getUsersService = async (): Promise<any> => {
+  const queryString: string = getAllUsersMoviesWatchedQuery
   try {
     const { rows } = await db.query(queryString, [])
-    const result: UserSecure[] = rows.map((row: UserFull) => {
-      return {
-        id: row.id,
-        username: row.username,
-        email: row.email
-      }
-    })
 
-    return result
+    return rows
   } catch (err: any) {
     throw new Error('Error connecting to db')
   }

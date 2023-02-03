@@ -53,3 +53,9 @@ export const getUserMoviesWatchedQuery = `
     JOIN user_movies ON user_movies.movie_id = movies.id
     WHERE user_movies.user_id = $1;
 `
+export const getAllUsersMoviesWatchedQuery = `
+    SELECT users.id, users.username, users.email, movies.title
+    FROM users
+    JOIN user_movies ON users.id = user_movies.user_id
+    JOIN movies ON user_movies.movie_id = movies.id;
+`
