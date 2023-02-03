@@ -3,7 +3,7 @@
 ## Added
 
 - Get movies route with query functionalities.
-- todo: Connected verifyToken to some routes that require authentication.
+- Connected verifyToken to some routes that require authentication.
 - todo: clean and work on the other functionalities.
 - todo: Write simple readme with how to setup the app. It has placeholders for where it would be deployed.
 

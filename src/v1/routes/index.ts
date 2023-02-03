@@ -22,7 +22,7 @@ defaultRouter
 
 // MOVIES routes
 defaultRouter
-  .post('/movies', movieCreateValidator, (postMovie) as RequestHandler) // add verifyToken middleware
+  .post('/movies', verifyToken, movieCreateValidator, (postMovie) as RequestHandler)
   .post('/movies/:movieId/watched', verifyToken, (postMovieWatched) as RequestHandler)
   .get('/movies', (getMovies) as RequestHandler)
   .get('/movies/novelties', (getNoveltyMovies) as RequestHandler)
@@ -30,5 +30,5 @@ defaultRouter
 
 // CATEGORIES routes
 defaultRouter
-  .post('/categories', categoryCreateValidator, (postCategory) as RequestHandler) // add verifyToken middleware
+  .post('/categories', verifyToken, categoryCreateValidator, (postCategory) as RequestHandler)
   .get('/categories', (getCategories) as RequestHandler)
