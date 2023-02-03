@@ -1,7 +1,7 @@
 import express, { RequestHandler } from 'express'
 import { getUserById, getUsers } from '../../controllers/users.controller'
 import { getMovieById, getMovies, getNoveltyMovies, postMovie, postMovieWatched } from '../../controllers/movies.controller'
-import { getCategories, getCategoryMovies, postCategory } from '../../controllers/categories.controller'
+import { getCategories, postCategory } from '../../controllers/categories.controller'
 import { postLogin, postSignup } from '../../controllers/auth.controller'
 import { userLoginValidator, userSignupValidator } from '../../utils/validators/user.validator'
 import { verifyToken } from '../../middlewares/verifyToken'
@@ -32,4 +32,3 @@ defaultRouter
 defaultRouter
   .post('/categories', categoryCreateValidator, (postCategory) as RequestHandler) // add verifyToken middleware
   .get('/categories', (getCategories) as RequestHandler)
-  .get('/categories/:id/movies', (getCategoryMovies) as RequestHandler)
